@@ -63,6 +63,27 @@ const productsSlice = createSlice({
   },
 });
 
+const createMemoizedSelector = (selector: (state: RootState) => any) => {
+  let lastResult: any;
+  let lastState: RootState;
+
+  return (state: RootState) => {
+    if (state === lastState) {
+      return lastResult;
+    }
+    lastState = state;
+    lastResult = selector(state);
+    return lastResult;
+  };
+};
+
 export const {loadMoreDisplayedProducts} = productsSlice.actions;
 export const selectProducts = (state: RootState) => state.products;
+export const selectBrands = createMemoizedSelector((state: RootState) =>
+  state.products.products.map(product => product.brand),
+);
+
+export const selectModels = createMemoizedSelector((state: RootState) =>
+  state.products.products.map(product => product.model),
+);
 export default productsSlice.reducer;

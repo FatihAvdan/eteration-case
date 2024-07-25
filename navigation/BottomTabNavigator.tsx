@@ -9,29 +9,28 @@ import {View, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Badge} from 'react-native-paper';
 
-import {selectCartItemLenght} from '../redux/slices/cartSlice';
+import {selectCartItemLength} from '../redux/slices/cartSlice';
+
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
-  // const cartItemCount = useSelector(state => state.cart);
-  const cartItemCount = useSelector(selectCartItemLenght);
+  const cartItemCount = useSelector(selectCartItemLength);
 
-  console.log('cartItemCount', cartItemCount);
   return (
     <Tab.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: 'blue', // Header arka plan rengini burada değiştiriyoruz
+          backgroundColor: '#1D1F24',
         },
-        headerTintColor: '#fff', // Header metin ve ikon rengini değiştiriyoruz
+        headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
         },
         tabBarStyle: {
-          // marginTop: 10, // Padding top eklemek için
+          backgroundColor: '#1A2036',
         },
-        tabBarActiveTintColor: 'white', // Aktif tab rengi
-        tabBarInactiveTintColor: 'gray', // Pasif tab rengi
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: 'gray',
       }}>
       <Tab.Screen
         name="Home"
@@ -42,7 +41,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
               name="home-outline"
-              color={'black'}
+              color={color}
               size={36}
             />
           ),
@@ -52,12 +51,13 @@ export default function BottomTabNavigator() {
         name="Cart"
         component={CartScreen}
         options={{
+          title: 'E-Market',
           tabBarLabel: '',
           tabBarIcon: ({color, size}) => (
             <View style={styles.iconContainer}>
               <MaterialCommunityIcons
                 name="basket-outline"
-                color={'black'}
+                color={color}
                 size={36}
               />
               {cartItemCount > 0 && (
@@ -73,11 +73,12 @@ export default function BottomTabNavigator() {
         name="Favorites"
         component={FavoritesScreen}
         options={{
+          title: 'Favorites',
           tabBarLabel: '',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
               name="star-outline"
-              color={'black'}
+              color={color}
               size={36}
             />
           ),
@@ -91,7 +92,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
               name="account-outline"
-              color={'black'}
+              color={color}
               size={36}
             />
           ),

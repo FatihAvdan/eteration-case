@@ -8,24 +8,16 @@ import {setCartItems} from './redux/slices/cartSlice';
 import {Provider} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect} from 'react';
-
+import {loadFavoritesFromStorage} from './redux/slices/favoritesSlice';
+import {loadCartFromStorage} from './redux/slices/cartSlice';
 const AppContent = () => {
   const dispatch = useDispatch();
 
-  const loadCartItems = async () => {
-    try {
-      const cartItemsJson = await AsyncStorage.getItem('cartItems');
-      const cartItems = cartItemsJson ? JSON.parse(cartItemsJson) : [];
-      // console.log('cart items loaded from local storage', cartItems);
-      dispatch(setCartItems(cartItems));
-    } catch (error) {
-      console.error('failed to load cart items from local storage', error);
-    }
-  };
   useEffect(() => {
-    loadCartItems();
-  }, [dispatch]);
-
+    // Favori ürünleri AsyncStorage'dan yükle
+    store.dispatch(loadFavoritesFromStorage());
+    store.dispatch(loadCartFromStorage());
+  }, []);
   return (
     <NavigationContainer>
       <BottomTabNavigator />
