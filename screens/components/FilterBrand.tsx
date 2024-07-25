@@ -20,7 +20,7 @@ const FilterBrand = () => {
       ? selectedBrands.filter(b => b !== brand)
       : [...selectedBrands, brand];
     dispatch(setFilterBrand(newBrands));
-    console.log(newBrands);
+    // console.log(newBrands);
   };
   const isSelected = (brand: string) => selectedBrands.includes(brand);
   const [searchQuery, setSearchQuery] = React.useState('');

@@ -20,7 +20,7 @@ const FilterModel = () => {
       ? selectedModels.filter(b => b !== model)
       : [...selectedModels, model];
     dispatch(setFilterModel(newModels));
-    console.log(newModels);
+    // console.log(newModels);
   };
   const isSelected = (model: string) => selectedModels.includes(model);
   const [searchQuery, setSearchQuery] = React.useState('');
